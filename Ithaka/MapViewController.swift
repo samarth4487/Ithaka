@@ -17,6 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var resizedImageDark: UIImage?
     let bottomView = BottomView()
     var count = 0
+    var sourceName: String?
+    var destinationName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,13 +111,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         if count == 1 {
             addBottomView()
-            bottomView.destinationLabel.text = "Select destination"
-            bottomView.sourceLabel.text = (view.annotation?.title)!
+            sourceName = (view.annotation?.title)!
+            bottomView.sourceLabel.text = sourceName
         } else if count == 2 {
-            bottomView.destinationLabel.text = (view.annotation?.title)!
+            destinationName = (view.annotation?.title)!
+            bottomView.destinationLabel.text = destinationName
             bottomView.searchButton.isHidden = false
-        } else if count == 0 {
-            
+            bottomView.searchButton.addTarget(self, action: #selector(handleSearch), for: .touchUpInside)
         }
     }
     
