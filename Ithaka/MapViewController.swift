@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
     var resizedImageLight: UIImage?
@@ -24,6 +25,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        scrollView.isHidden = true
+        
         resizeImages()
         requestLocationAccess()
         addAnnotations()
@@ -156,6 +159,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         self.travels.append(travel)
                     }
                     print(self.travels.count)
+                    
+                    DispatchQueue.main.async {
+                        self.buildCards()
+                    }
                 }
             }
             
@@ -163,6 +170,38 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func buildCards() {
+        
+        bottomView.isHidden = true
+        scrollView.isHidden = false
+        
+        let width: CGFloat = 240
+        let height: CGFloat = 128
+        let screenWidth = UIScreen.main.bounds.width
+        let leftEdge = (screenWidth - width) / 2
+        var factor = travels.count
+        
+        if travels.count > 2 {
+            factor = 2
+        } else {
+            factor = travels.count
+        }
+        for x in 0 ..< factor{
+            
+            let mainView = UIView()
+            mainView.backgroundColor = UIColor.white
+            mainView.layer.masksToBounds = true
+            mainView.layer.cornerRadius = 10
+            scrollView.addSubview(mainView)
+            
+            mainView.frame = CGRect(x: leftEdge + (screenWidth * CGFloat(x)), y: 11, width: width, height: height)
+        }
+        
+        scrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width * CGFloat(factor)), height: scrollView.frame.size.height)
+        
+        setupDetailedCards()
+    }
+    
+    func setupDetailedCards() {
         
         
     }

@@ -24,15 +24,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gZI-rD-FTd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ov-c3-hnn">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ov-c3-hnn">
                                 <rect key="frame" x="0.0" y="517" width="375" height="150"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0T9-dv-ELt">
-                                        <rect key="frame" x="67" y="11" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="TNa-3E-i1t"/>
                                 </constraints>
@@ -51,6 +44,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="gZI-rD-FTd" id="zij-5f-u2T"/>
+                        <outlet property="scrollView" destination="1Ov-c3-hnn" id="u75-bA-NJh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
