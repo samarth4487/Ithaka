@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Bangkok</string>
+		<key>description</key>
+		<string>Welcome to Bangkok!</string>
+		<key>latitude</key>
+		<real>13.724561</real>
+		<key>longitude</key>
+		<real>100.4930249</real>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Phuket</string>
+		<key>description</key>
+		<string>Welcome to Phuket!</string>
+		<key>latitude</key>
+		<real>7.8833604</real>
+		<key>longitude</key>
+		<real>98.3744039</real>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Krabi</string>
+		<key>description</key>
+		<string>Welcome to Krabi!</string>
+		<key>latitude</key>
+		<real>8.0306534</real>
+		<key>longitude</key>
+		<real>98.8174321</real>
+	</dict>
+    <dict>
+        <key>title</key>
+        <string>Koh Phi Phi</string>
+        <key>description</key>
+        <string>Welcome to Koh Phi Phi!</string>
+        <key>latitude</key>
+        <real>7.7526506</real>
+        <key>longitude</key>
+        <real>98.7390835</real>
+    </dict>
+    <dict>
+        <key>title</key>
+        <string>Koh Samui</string>
+        <key>description</key>
+        <string>Welcome to Koh Samui!</string>
+        <key>latitude</key>
+        <real>9.50108</real>
+        <key>longitude</key>
+        <real>99.931372</real>
+    </dict>
+    <dict>
+        <key>title</key>
+        <string>Surat Thani</string>
+        <key>description</key>
+        <string>Welcome to Surat Thani!</string>
+        <key>latitude</key>
+        <real>9.1546336</real>
+        <key>longitude</key>
+        <real>99.2639922</real>
+    </dict>
+</array>
+</plist>
