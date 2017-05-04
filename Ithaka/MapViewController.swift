@@ -13,10 +13,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
+    var resizedImageLight: UIImage?
+    var resizedImageDark: UIImage?
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        resizeImages()
         requestLocationAccess()
         addAnnotations()
         
@@ -29,6 +33,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: false)
+    }
+    
+    func resizeImages() {
+        
+        let pinImageLight = UIImage(named: "pin_light")
+        let sizeLight = CGSize(width: 30, height: 50)
+        UIGraphicsBeginImageContext(sizeLight)
+        pinImageLight!.draw(in: CGRect(x: 0, y: 0, width: sizeLight.width, height: sizeLight.height))
+        resizedImageLight = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let pinImageDark = UIImage(named: "pin_dark")
+        let sizeDark = CGSize(width: 30, height: 50)
+        UIGraphicsBeginImageContext(sizeDark)
+        pinImageDark!.draw(in: CGRect(x: 0, y: 0, width: sizeDark.width, height: sizeDark.height))
+        resizedImageDark = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
     }
     
     func requestLocationAccess() {
@@ -64,16 +85,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         else {
             let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") ?? MKAnnotationView()
             
-            let pinImage = UIImage(named: "pin_light")
-            let size = CGSize(width: 30, height: 50)
-            UIGraphicsBeginImageContext(size)
-            pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            annotationView.image = resizedImage
+            annotationView.image = resizedImageLight
+            annotationView.canShowCallout = true
+            let selectButton = UIButton()
+            selectButton.frame = CGRect(x: 0, y: 0, width: 30, height: 50)
+            selectButton.setImage(resizedImageLight, for: .normal)
+            annotationView.rightCalloutAccessoryView = selectButton
             
             return annotationView
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if view.image == resizedImageLight {
+            count = count + 1
+            view.image = resizedImageDark
+        } else {
+            count = count - 1
+            view.image = resizedImageLight
         }
     }
 
