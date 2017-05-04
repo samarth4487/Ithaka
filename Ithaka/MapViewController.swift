@@ -296,7 +296,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func handleDetails() {
         
-        print("a")
+        performSegue(withIdentifier: "detail", sender: travels)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "detail" {
+            if let nextScene = segue.destination as? RoutesDetailViewController {
+                nextScene.travels = sender as? [Travel]
+                //print(sender)
+            }
+        }
+        
     }
 
 }
