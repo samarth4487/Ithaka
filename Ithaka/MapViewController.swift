@@ -153,8 +153,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         print(object)
                         let travel = Travel()
                         travel.type = obj["type"] as? String
-                        travel.totalDuration = obj["totalDuration"] as? String
-                        travel.totalCost = obj["totalCost"] as? String
+                        travel.totalDuration = obj["totalDuration"] as? Double
+                        travel.totalCost = obj["totalCost"] as? Double
                         travel.routes = obj["routes"] as? [[String : Any]]
                         self.travels.append(travel)
                     }
@@ -187,6 +187,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         for x in 0 ..< factor{
             
+            let routes = travels[x].routes
             let mainView = UIView()
             mainView.backgroundColor = UIColor.white
             mainView.layer.masksToBounds = true
@@ -194,16 +195,108 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             scrollView.addSubview(mainView)
             
             mainView.frame = CGRect(x: leftEdge + (screenWidth * CGFloat(x)), y: 11, width: width, height: height)
+            
+            let sourceLabel = UILabel()
+            mainView.addSubview(sourceLabel)
+            sourceLabel.translatesAutoresizingMaskIntoConstraints = false
+            sourceLabel.text = routes?[0]["from"] as? String
+            sourceLabel.font = UIFont.systemFont(ofSize: 12)
+            sourceLabel.textAlignment = .center
+            sourceLabel.textColor = UIColor.black
+            sourceLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 10).isActive = true
+            sourceLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
+            sourceLabel.widthAnchor.constraint(equalToConstant: (mainView.bounds.width - 50)/2).isActive = true
+            sourceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            let destinationLabel = UILabel()
+            mainView.addSubview(destinationLabel)
+            destinationLabel.translatesAutoresizingMaskIntoConstraints = false
+            destinationLabel.text = routes?[0]["to"] as? String
+            destinationLabel.font = UIFont.systemFont(ofSize: 12)
+            destinationLabel.textAlignment = .center
+            destinationLabel.textColor = UIColor.black
+            destinationLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -10).isActive = true
+            destinationLabel.widthAnchor.constraint(equalToConstant: (mainView.bounds.width - 50)/2).isActive = true
+            destinationLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
+            destinationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            let centreLabel = UILabel()
+            mainView.addSubview(centreLabel)
+            centreLabel.translatesAutoresizingMaskIntoConstraints = false
+            centreLabel.text = ">"
+            centreLabel.textAlignment = .center
+            centreLabel.textColor = UIColor.red
+            centreLabel.leftAnchor.constraint(equalTo: sourceLabel.rightAnchor, constant: 10).isActive = true
+            centreLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
+            centreLabel.rightAnchor.constraint(equalTo: destinationLabel.leftAnchor, constant: -10).isActive = true
+            centreLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            let middleLine = UIView()
+            middleLine.translatesAutoresizingMaskIntoConstraints = false
+            mainView.addSubview(middleLine)
+            middleLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            middleLine.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 10).isActive = true
+            middleLine.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -10).isActive = true
+            middleLine.backgroundColor = UIColor.gray
+            middleLine.topAnchor.constraint(equalTo: centreLabel.bottomAnchor, constant: 5).isActive = true
+            
+            let transportLabel = UILabel()
+            mainView.addSubview(transportLabel)
+            transportLabel.translatesAutoresizingMaskIntoConstraints = false
+            transportLabel.textAlignment = .center
+            transportLabel.font = UIFont.systemFont(ofSize: 22)
+            transportLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 10).isActive = true
+            transportLabel.text = travels[x].type
+            transportLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -10).isActive = true
+            transportLabel.textColor = UIColor.lightGray
+            transportLabel.topAnchor.constraint(equalTo: middleLine.bottomAnchor, constant: 5).isActive = true
+            
+            let timeLabel = UILabel()
+            mainView.addSubview(timeLabel)
+            timeLabel.translatesAutoresizingMaskIntoConstraints = false
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.systemFont(ofSize: 16)
+            timeLabel.text = "\(travels[0].totalDuration!) hours"
+            timeLabel.textColor = UIColor.orange
+            timeLabel.topAnchor.constraint(equalTo: transportLabel.bottomAnchor, constant: 10).isActive = true
+            timeLabel.rightAnchor.constraint(equalTo: mainView.centerXAnchor, constant: -10).isActive = true
+            timeLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+            
+            let costLabel = UILabel()
+            mainView.addSubview(costLabel)
+            costLabel.translatesAutoresizingMaskIntoConstraints = false
+            costLabel.textAlignment = .center
+            costLabel.font = UIFont.systemFont(ofSize: 16)
+            costLabel.text = "\(travels[0].totalCost!) THB"
+            costLabel.textColor = UIColor.green
+            costLabel.topAnchor.constraint(equalTo: transportLabel.bottomAnchor, constant: 10).isActive = true
+            costLabel.leftAnchor.constraint(equalTo: mainView.centerXAnchor, constant: 10).isActive = true
+            costLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+            
+            let additionalButton = UIButton(type: .system)
+            scrollView.addSubview(additionalButton)
+            additionalButton.translatesAutoresizingMaskIntoConstraints = false
+            additionalButton.layer.masksToBounds = true
+            additionalButton.layer.cornerRadius = 25
+            additionalButton.isHidden = true
+            additionalButton.setBackgroundImage(UIImage(named: "plus-512"), for: .normal)
+            additionalButton.leftAnchor.constraint(equalTo: mainView.rightAnchor, constant: 10).isActive = true
+            additionalButton.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
+            additionalButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            additionalButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            additionalButton.addTarget(self, action: #selector(handleDetails), for: UIControlEvents.touchUpInside)
+            
+            if x == factor - 1 {
+                additionalButton.isHidden = false
+            }
         }
         
         scrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width * CGFloat(factor)), height: scrollView.frame.size.height)
-        
-        setupDetailedCards()
     }
     
-    func setupDetailedCards() {
+    func handleDetails() {
         
-        
+        print("a")
     }
 
 }

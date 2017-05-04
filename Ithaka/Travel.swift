@@ -10,8 +10,8 @@ import UIKit
 
 class Travel {
     
-    var totalDuration: String?
-    var totalCost: String?
+    var totalDuration: Double?
+    var totalCost: Double?
     var type: String?
     var routes: [[String: Any]]?
 }
