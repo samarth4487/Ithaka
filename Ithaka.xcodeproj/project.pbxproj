@@ -15,6 +15,7 @@
 		10E799671EBB08A8004479EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E799661EBB08A8004479EA /* MapKit.framework */; };
 		10E799691EBB1405004479EA /* Places.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E799681EBB1405004479EA /* Places.plist */; };
 		10E7996B1EBB140C004479EA /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E7996A1EBB140C004479EA /* Place.swift */; };
+		10E7996D1EBB23AD004479EA /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E7996C1EBB23AD004479EA /* BottomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		10E799661EBB08A8004479EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		10E799681EBB1405004479EA /* Places.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Places.plist; sourceTree = "<group>"; };
 		10E7996A1EBB140C004479EA /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		10E7996C1EBB23AD004479EA /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				10E799511EBB022E004479EA /* AppDelegate.swift */,
 				10E799631EBB0584004479EA /* MapViewController.swift */,
+				10E7996C1EBB23AD004479EA /* BottomView.swift */,
 				10E7996A1EBB140C004479EA /* Place.swift */,
 				10E799681EBB1405004479EA /* Places.plist */,
 				10E799551EBB022E004479EA /* Main.storyboard */,
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10E799521EBB022E004479EA /* AppDelegate.swift in Sources */,
+				10E7996D1EBB23AD004479EA /* BottomView.swift in Sources */,
 				10E799641EBB0584004479EA /* MapViewController.swift in Sources */,
 				10E7996B1EBB140C004479EA /* Place.swift in Sources */,
 			);

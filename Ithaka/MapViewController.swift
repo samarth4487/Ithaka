@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     var resizedImageLight: UIImage?
     var resizedImageDark: UIImage?
+    let bottomView = BottomView()
     var count = 0
     
     override func viewDidLoad() {
@@ -105,6 +106,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             count = count - 1
             view.image = resizedImageLight
         }
+        
+        if count == 1 {
+            addBottomView()
+            bottomView.destinationLabel.text = "Select destination"
+            bottomView.sourceLabel.text = (view.annotation?.title)!
+        } else if count == 2 {
+            bottomView.destinationLabel.text = (view.annotation?.title)!
+            bottomView.searchButton.isHidden = false
+        } else if count == 0 {
+            
+        }
+    }
+    
+    func addBottomView() {
+        
+        view.addSubview(bottomView)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.backgroundColor = UIColor.white
+        bottomView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        bottomView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        bottomView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
     }
 
 }
