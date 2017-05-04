@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		10AE3E7B1EBB2F7400E9C581 /* MapsViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AE3E7A1EBB2F7400E9C581 /* MapsViewControllerExtension.swift */; };
+		10AE3E7D1EBB419C00E9C581 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AE3E7C1EBB419C00E9C581 /* Travel.swift */; };
 		10E799521EBB022E004479EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E799511EBB022E004479EA /* AppDelegate.swift */; };
 		10E799571EBB022E004479EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10E799551EBB022E004479EA /* Main.storyboard */; };
 		10E799591EBB022E004479EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E799581EBB022E004479EA /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		10AE3E7A1EBB2F7400E9C581 /* MapsViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewControllerExtension.swift; sourceTree = "<group>"; };
+		10AE3E7C1EBB419C00E9C581 /* Travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		10E7994E1EBB022E004479EA /* Ithaka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ithaka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E799511EBB022E004479EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10E799561EBB022E004479EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				10AE3E7A1EBB2F7400E9C581 /* MapsViewControllerExtension.swift */,
 				10E7996C1EBB23AD004479EA /* BottomView.swift */,
 				10E7996A1EBB140C004479EA /* Place.swift */,
+				10AE3E7C1EBB419C00E9C581 /* Travel.swift */,
 				10E799681EBB1405004479EA /* Places.plist */,
 				10E799551EBB022E004479EA /* Main.storyboard */,
 				10E799581EBB022E004479EA /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 				10E799521EBB022E004479EA /* AppDelegate.swift in Sources */,
 				10E7996D1EBB23AD004479EA /* BottomView.swift in Sources */,
 				10E799641EBB0584004479EA /* MapViewController.swift in Sources */,
+				10AE3E7D1EBB419C00E9C581 /* Travel.swift in Sources */,
 				10AE3E7B1EBB2F7400E9C581 /* MapsViewControllerExtension.swift in Sources */,
 				10E7996B1EBB140C004479EA /* Place.swift in Sources */,
 			);

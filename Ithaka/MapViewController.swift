@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var count = 0
     var sourceName: String?
     var destinationName: String?
+    var travels = [Travel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +131,40 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         bottomView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         bottomView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+    }
+    
+    func handleSearch() {
+        
+        let URL = "http://dev.ithaka.travel/transport/from/\(sourceName!)/to/\(destinationName!)"
+        let url = NSURL(string: URL)
+        let request = URLRequest(url: url! as URL)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            let fetchedData = try? JSONSerialization.jsonObject(with: data!, options: []) as? [Any]
+            
+            if let j = fetchedData {
+                if let objectArray = j {
+                    for object in objectArray {
+                        let obj = object as! Dictionary<String, Any>
+                        print(object)
+                        let travel = Travel()
+                        travel.type = obj["type"] as? String
+                        travel.totalDuration = obj["totalDuration"] as? String
+                        travel.totalCost = obj["totalCost"] as? String
+                        travel.routes = obj["routes"] as? [[String : Any]]
+                        self.travels.append(travel)
+                    }
+                    print(self.travels.count)
+                }
+            }
+            
+            }.resume()
+    }
+    
+    func buildCards() {
+        
+        
     }
 
 }
