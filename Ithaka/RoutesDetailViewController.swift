@@ -10,10 +10,10 @@ import UIKit
 
 class RoutesDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var routes: [Route] = []
+    var routes: [[Dictionary<String, Any>]] = []
     var travels: [Travel]?
-    var sortedRoutesCost: [Route] = []
-    var sortedRoutesTime: [Route] = []
+    var sortedRoutesCost: [[Dictionary<String, Any>]] = []
+    var sortedRoutesTime: [[Dictionary<String, Any>]] = []
     
     @IBOutlet weak var sortingLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -29,28 +29,39 @@ class RoutesDetailViewController: UIViewController, UITableViewDataSource, UITab
         tableView.dataSource = self
         tableView.rowHeight = 100
         
-        for travel in travels! {
-            let route = Route()
-            var r = travel.routes
-            route.cost = NSInteger((travel.totalCost)!)
-            route.destination = r?[0]["to"] as? String
-            route.duration = (travel.totalDuration)!
-            route.source = r?[0]["from"] as? String
-            route.time = r?[0]["time"] as? String
-            route.transport = travel.type
-            routes.append(route)
-        }
+        costSort()
+    }
+    
+    func costSort() {
         
-        sortedRoutesCost = routes.sorted(by: { $0.cost! < $1.cost! })
-        sortedRoutesTime = routes.sorted(by: { $0.duration! < $1.duration! })
+        travels = travels?.sorted(by: { $0.totalCost! < $1.totalCost! })
+        
+        routes = []
+        for travel in travels! {
+            routes.append(travel.routes!)
+        }
+    }
+    
+    func timeSort() {
+        
+        travels = travels?.sorted(by: { $0.totalDuration! < $1.totalDuration! })
+        
+        routes = []
+        for travel in travels! {
+            routes.append(travel.routes!)
+        }
     }
     
     func handleSort() {
         
         if sortingLabel.text == "Price" {
+            timeSort()
             sortingLabel.text = "Time"
+            tableView.reloadData()
         } else {
+            costSort()
             sortingLabel.text = "Price"
+            tableView.reloadData()
         }
     }
     
@@ -59,7 +70,7 @@ class RoutesDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (travels?.count)!
+        return routes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,29 +80,22 @@ class RoutesDetailViewController: UIViewController, UITableViewDataSource, UITab
         tableView.rowHeight = 100
         cell.setupViews()
         
-        cell.transportLabel.text = travels?[indexPath.row].type
-        //cell.durationLabel.text = "\((travels?[indexPath.row].totalDuration)!) hours"
-        //cell.costLabel.text = "\((travels?[indexPath.row].totalCost)!) THB"
+        cell.transportLabel.text = routes[indexPath.row][0]["mode"] as? String
+        cell.costLabel.text = "\((routes[indexPath.row][0]["cost"])!) THB"
+        cell.durationLabel.text = "\((routes[indexPath.row][0]["duration"])!) hours"
+        cell.timeLabel.text = routes[indexPath.row][0]["time"] as? String
+        cell.sourceLabel.text = routes[indexPath.row][0]["from"] as? String
+        cell.destinationLabel.text = routes[indexPath.row][0]["to"] as? String
         
-        var routes = travels?[indexPath.row].routes
-        cell.costLabel.text = "\((routes?[0]["cost"])!) THB"
-        cell.durationLabel.text = "\((routes?[0]["duration"])!) hours"
-        cell.timeLabel.text = routes?[0]["time"] as? String
-        cell.sourceLabel.text = routes?[0]["from"] as? String
-        cell.destinationLabel.text = routes?[0]["to"] as? String
-        
-        if (routes?.count)! > 1 {
-            tableView.rowHeight = CGFloat(100 * (routes?.count)!)
-            for x in 1 ..< (routes?.count)! {
+        if (routes[indexPath.row].count) > 1 {
+            tableView.rowHeight = CGFloat(100 * (routes[indexPath.row].count))
+            for x in 1 ..< (routes[indexPath.row].count) {
                 cell.additionalCellViews(factor: x)
-                //cell.costLabelAdditional.text = "\((travels?[indexPath.row].totalCost)!) THB"
-                
-                var routes = travels?[indexPath.row].routes
-                cell.costLabelAdditional.text = "\((routes?[x]["cost"])!) THB"
-                cell.durationLabelAdditional.text = "\((routes?[x]["duration"])!) hours"
-                cell.timeLabelAdditional.text = routes?[x]["time"] as? String
-                cell.sourceLabelAdditional.text = routes?[x]["from"] as? String
-                cell.destinationLabelAdditional.text = routes?[x]["to"] as? String
+                cell.costLabelAdditional.text = "\((routes[indexPath.row][x]["cost"])!) THB"
+                cell.durationLabelAdditional.text = "\((routes[indexPath.row][x]["duration"])!) hours"
+                cell.timeLabelAdditional.text = routes[indexPath.row][x]["time"] as? String
+                cell.sourceLabelAdditional.text = routes[indexPath.row][x]["from"] as? String
+                cell.destinationLabelAdditional.text = routes[indexPath.row][x]["to"] as? String
             }
         }
         
@@ -102,14 +106,4 @@ class RoutesDetailViewController: UIViewController, UITableViewDataSource, UITab
         
         dismiss(animated: true, completion: nil)
     }
-}
-
-class Route {
-    
-    var transport: String?
-    var source: String?
-    var destination: String?
-    var duration: Double?
-    var cost: NSInteger?
-    var time: String?
 }
