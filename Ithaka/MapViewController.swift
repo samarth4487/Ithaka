@@ -22,9 +22,31 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var destinationName: String?
     var travels = [Travel]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        scrollView.isHidden = true
+//        
+//        resizeImages()
+//        requestLocationAccess()
+//        addAnnotations()
+//        
+//        let latitude:CLLocationDegrees = 10.4930
+//        let longitude:CLLocationDegrees = 99.1800
+//        let latDelta:CLLocationDegrees = 4
+//        let lonDelta:CLLocationDegrees = 4
+//        let span = MKCoordinateSpanMake(latDelta, lonDelta)
+//        let location = CLLocationCoordinate2DMake(latitude, longitude)
+//        let region = MKCoordinateRegionMake(location, span)
+//        
+//        mapView.setRegion(region, animated: false)
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        count = 0
+        travels = []
         scrollView.isHidden = true
         
         resizeImages()
@@ -40,6 +62,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: false)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        let anno = mapView.annotations
+        mapView.removeAnnotations(anno)
+        //bottomView.removeFromSuperview()
+        //additionalButton.removeFromSuperview()
     }
     
     func resizeImages() {
@@ -106,6 +137,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if view.image == resizedImageLight {
+            print(1)
             count = count + 1
             view.image = resizedImageDark
         } else {
@@ -114,9 +146,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         if count == 1 {
+            print(2)
             addBottomView()
             sourceName = (view.annotation?.title)!
+            print(4)
             bottomView.sourceLabel.text = sourceName
+            bottomView.destinationLabel.text = "Select destination"
         } else if count == 2 {
             destinationName = (view.annotation?.title)!
             bottomView.destinationLabel.text = destinationName
@@ -134,6 +169,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         bottomView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         bottomView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+        print(3)
     }
     
     func handleSearch() {
@@ -173,20 +209,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func buildCards() {
         
-        bottomView.isHidden = true
+        bottomView.removeFromSuperview()
         scrollView.isHidden = false
         
         let width: CGFloat = 240
         let height: CGFloat = 128
         let screenWidth = UIScreen.main.bounds.width
         let leftEdge = (screenWidth - width) / 2
-        var factor = travels.count
+        let factor = travels.count
         
-        if travels.count > 2 {
-            factor = 2
-        } else {
-            factor = travels.count
-        }
+        //if travels.count > 2 {
+            //factor = 2
+        //} else {
+            //factor = travels.count
+        //}
         for x in 0 ..< factor{
             
             let routes = travels[x].routes
@@ -299,6 +335,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func handleDetails() {
         
         performSegue(withIdentifier: "detail", sender: travels)
+        for view in self.scrollView.subviews {
+            view.removeFromSuperview()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
