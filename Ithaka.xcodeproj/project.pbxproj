@@ -50,6 +50,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10A1732D1EBC592200C4D7A4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				10E799631EBB0584004479EA /* MapViewController.swift */,
+				10AE3E7E1EBB819400E9C581 /* RoutesDetailViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		10A1732E1EBC593600C4D7A4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				10E7996C1EBB23AD004479EA /* BottomView.swift */,
+				10AE3E821EBB8F1500E9C581 /* RouteCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		10A1732F1EBC593C00C4D7A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				10E7996A1EBB140C004479EA /* Place.swift */,
+				10AE3E7C1EBB419C00E9C581 /* Travel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		10A173301EBC594D00C4D7A4 /* Additional Files */ = {
+			isa = PBXGroup;
+			children = (
+				10E799681EBB1405004479EA /* Places.plist */,
+			);
+			name = "Additional Files";
+			sourceTree = "<group>";
+		};
+		10A173311EBC59BC00C4D7A4 /* PreGenerated Files */ = {
+			isa = PBXGroup;
+			children = (
+				10E799511EBB022E004479EA /* AppDelegate.swift */,
+				10E799551EBB022E004479EA /* Main.storyboard */,
+				10E799581EBB022E004479EA /* Assets.xcassets */,
+				10E7995A1EBB022E004479EA /* LaunchScreen.storyboard */,
+				10E7995D1EBB022E004479EA /* Info.plist */,
+			);
+			name = "PreGenerated Files";
+			sourceTree = "<group>";
+		};
 		10E799451EBB022E004479EA = {
 			isa = PBXGroup;
 			children = (
@@ -70,18 +117,11 @@
 		10E799501EBB022E004479EA /* Ithaka */ = {
 			isa = PBXGroup;
 			children = (
-				10E799511EBB022E004479EA /* AppDelegate.swift */,
-				10E799631EBB0584004479EA /* MapViewController.swift */,
-				10AE3E7E1EBB819400E9C581 /* RoutesDetailViewController.swift */,
-				10AE3E821EBB8F1500E9C581 /* RouteCell.swift */,
-				10E7996C1EBB23AD004479EA /* BottomView.swift */,
-				10E7996A1EBB140C004479EA /* Place.swift */,
-				10AE3E7C1EBB419C00E9C581 /* Travel.swift */,
-				10E799681EBB1405004479EA /* Places.plist */,
-				10E799551EBB022E004479EA /* Main.storyboard */,
-				10E799581EBB022E004479EA /* Assets.xcassets */,
-				10E7995A1EBB022E004479EA /* LaunchScreen.storyboard */,
-				10E7995D1EBB022E004479EA /* Info.plist */,
+				10A1732F1EBC593C00C4D7A4 /* Model */,
+				10A1732E1EBC593600C4D7A4 /* View */,
+				10A1732D1EBC592200C4D7A4 /* Controller */,
+				10A173301EBC594D00C4D7A4 /* Additional Files */,
+				10A173311EBC59BC00C4D7A4 /* PreGenerated Files */,
 			);
 			path = Ithaka;
 			sourceTree = "<group>";

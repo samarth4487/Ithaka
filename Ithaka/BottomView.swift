@@ -22,7 +22,7 @@ class BottomView: UIView {
     
     let width = UIScreen.main.bounds.width - 80
     
-    func setupViews() {
+    private func setupViews() {
         
         let titleLabel = UILabel()
         addSubview(titleLabel)

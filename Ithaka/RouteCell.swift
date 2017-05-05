@@ -38,7 +38,6 @@ class RouteCell: UITableViewCell {
     
     func setupViews() {
         
-        
         transportLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(transportLabel)
         transportLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
