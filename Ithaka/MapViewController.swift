@@ -138,7 +138,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func handleSearch() {
         
-        let URL = "http://dev.ithaka.travel/transport/from/\(sourceName!)/to/\(destinationName!)"
+        let newSourceName = sourceName?.replacingOccurrences(of: " ", with: "%20")
+        let newDestinationName = destinationName?.replacingOccurrences(of: " ", with: "%20")
+        let URL = "http://dev.ithaka.travel/transport/from/\(newSourceName!)/to/\(newDestinationName!)"
         let url = NSURL(string: URL)
         let request = URLRequest(url: url! as URL)
         

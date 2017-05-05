@@ -28,6 +28,13 @@ class RouteCell: UITableViewCell {
     let timeLabel = UILabel()
     let durationLabel = UILabel()
     let costLabel = UILabel()
+    let dottedLabel = UILabel()
+    let sourceLabelAdditional = UILabel()
+    let destinationLabelAdditional = UILabel()
+    let centreLabelAdditional = UILabel()
+    let timeLabelAdditional = UILabel()
+    let durationLabelAdditional = UILabel()
+    let costLabelAdditional = UILabel()
     
     func setupViews() {
         
@@ -41,8 +48,7 @@ class RouteCell: UITableViewCell {
         transportLabel.textAlignment = .center
         transportLabel.textColor = UIColor(red: 240/255, green: 95/255, blue: 113/255, alpha: 1)
         transportLabel.text = "Samarth"
-        
-        
+
         self.addSubview(sourceLabel)
         sourceLabel.translatesAutoresizingMaskIntoConstraints = false
         sourceLabel.text = "Samarth"
@@ -96,8 +102,6 @@ class RouteCell: UITableViewCell {
         durationLabel.leftAnchor.constraint(equalTo: timeLabel.rightAnchor, constant: 10).isActive = true
         durationLabel.topAnchor.constraint(equalTo: centreLabel.bottomAnchor, constant: 10).isActive = true
         durationLabel.widthAnchor.constraint(equalToConstant: (self.bounds.width - 60)/3).isActive = true
-
-        
         
         costLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(costLabel)
@@ -107,7 +111,77 @@ class RouteCell: UITableViewCell {
         costLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         costLabel.topAnchor.constraint(equalTo: centreLabel.bottomAnchor, constant: 10).isActive = true
         costLabel.widthAnchor.constraint(equalToConstant: (self.bounds.width - 60)/3).isActive = true
-
+    }
+    
+    func additionalCellViews(factor: Int) {
+        
+        dottedLabel.text = "- - - - - - - - - - - - - - - - - - - - - - - -"
+        self.addSubview(dottedLabel)
+        dottedLabel.textAlignment = .center
+        dottedLabel.frame = CGRect(x: 30, y: 100 * CGFloat(factor), width: self.frame.width - 60, height: 20)
+        
+        self.addSubview(sourceLabelAdditional)
+        sourceLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        sourceLabelAdditional.text = "Samarth"
+        sourceLabelAdditional.font = UIFont.systemFont(ofSize: 18)
+        sourceLabelAdditional.textAlignment = .center
+        sourceLabelAdditional.textColor = UIColor.black
+        sourceLabelAdditional.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        sourceLabelAdditional.topAnchor.constraint(equalTo: dottedLabel.bottomAnchor, constant: 10).isActive = true
+        sourceLabelAdditional.widthAnchor.constraint(equalToConstant: (self.bounds.width - 80)/2).isActive = true
+        sourceLabelAdditional.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        self.addSubview(destinationLabelAdditional)
+        destinationLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        destinationLabelAdditional.text = "Samarth"
+        destinationLabelAdditional.font = UIFont.systemFont(ofSize: 18)
+        destinationLabelAdditional.textAlignment = .center
+        destinationLabelAdditional.textColor = UIColor.black
+        destinationLabelAdditional.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+        destinationLabelAdditional.widthAnchor.constraint(equalToConstant: (self.bounds.width - 80)/2).isActive = true
+        destinationLabelAdditional.topAnchor.constraint(equalTo: dottedLabel.bottomAnchor, constant: 10).isActive = true
+        destinationLabelAdditional.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        self.addSubview(centreLabelAdditional)
+        centreLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        centreLabelAdditional.text = ">"
+        centreLabelAdditional.textAlignment = .center
+        centreLabelAdditional.textColor = UIColor.red
+        centreLabelAdditional.leftAnchor.constraint(equalTo: sourceLabelAdditional.rightAnchor, constant: 10).isActive = true
+        centreLabelAdditional.topAnchor.constraint(equalTo: dottedLabel.bottomAnchor, constant: 10).isActive = true
+        centreLabelAdditional.rightAnchor.constraint(equalTo: destinationLabelAdditional.leftAnchor, constant: -10).isActive = true
+        centreLabelAdditional.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        timeLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(timeLabelAdditional)
+        timeLabelAdditional.text = "Samarth"
+        timeLabelAdditional.textAlignment = .center
+        timeLabelAdditional.textColor = UIColor.blue
+        timeLabelAdditional.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        timeLabelAdditional.topAnchor.constraint(equalTo: centreLabelAdditional.bottomAnchor, constant: 10).isActive = true
+        timeLabelAdditional.widthAnchor.constraint(equalToConstant: (self.bounds.width - 60)/3).isActive = true
+        
+        
+        durationLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(durationLabelAdditional)
+        durationLabelAdditional.text = "Samarth"
+        durationLabelAdditional.textAlignment = .center
+        durationLabelAdditional.textColor = UIColor.orange
+        durationLabelAdditional.leftAnchor.constraint(equalTo: timeLabelAdditional.rightAnchor, constant: 10).isActive = true
+        durationLabelAdditional.topAnchor.constraint(equalTo: centreLabelAdditional.bottomAnchor, constant: 10).isActive = true
+        durationLabelAdditional.widthAnchor.constraint(equalToConstant: (self.bounds.width - 60)/3).isActive = true
+        
+        costLabelAdditional.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(costLabelAdditional)
+        costLabelAdditional.text = "Samarth"
+        costLabelAdditional.textAlignment = .center
+        costLabelAdditional.textColor = UIColor.green
+        costLabelAdditional.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+        costLabelAdditional.topAnchor.constraint(equalTo: centreLabelAdditional.bottomAnchor, constant: 10).isActive = true
+        costLabelAdditional.widthAnchor.constraint(equalToConstant: (self.bounds.width - 60)/3).isActive = true
     }
 
 }
