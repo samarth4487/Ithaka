@@ -174,11 +174,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func handleSearch() {
         
-        let newSourceName = sourceName?.replacingOccurrences(of: " ", with: "%20")
-        let newDestinationName = destinationName?.replacingOccurrences(of: " ", with: "%20")
-        let URL = "http://dev.ithaka.travel/transport/from/\(newSourceName!)/to/\(newDestinationName!)"
-        let url = NSURL(string: URL)
+        //let newSourceName = sourceName?.replacingOccurrences(of: " ", with: "%20")
+        //let newDestinationName = destinationName?.replacingOccurrences(of: " ", with: "%20")
+        //let URL = "http://dev.ithaka.travel/transport/from/\(newSourceName!)/to/\(newDestinationName!)"
+        //let url = NSURL(string: URL)
+        //let request = URLRequest(url: url! as URL)
+
+        let BASE_URL = "http://dev.ithaka.travel/transport/from/"
+        let newSource = sourceName?.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)
+        let newDestination = destinationName?.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)
+        let newURL = "\(BASE_URL)\(newSource!)/to/\(newDestination!)"
+        let url = NSURL(string: newURL)
         let request = URLRequest(url: url! as URL)
+        
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
